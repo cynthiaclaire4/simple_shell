@@ -9,12 +9,12 @@
 
 int main(void)
 {
-	char *cmd = NULL;
-	char *args[] = {NULL, NULL};
+	char *cmdstr = NULL; /* command strings */
+	char **args = NULL;;
 
-	cmd = execute_line();
+	cmdstr = execute_line();
 
-	args[0] = cmd;
+	args = to_args(cmdstr);
 	if (execve(args[0], args, NULL) < 0)
 	{
 		dprintf(STDERR_FILENO, "%s: command not found\n", args[0]);
