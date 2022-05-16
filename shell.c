@@ -3,12 +3,15 @@
 #include<unistd.h>
 #include "main.h"
 
+/*
+ * main - body of the program
+ */
 int main(int ac, char **av)
 {
 	char *cmdstr = NULL;
 	char **args = NULL;
 
-	while(1)
+	while (1)
 	{
 		if (ac > 1)
 			args = av + 1;
@@ -25,5 +28,5 @@ int main(int ac, char **av)
 
 		dprintf(STDERR_FILENO, "%s: command not found\n", args[0]);
 	}
-	return(0);
+	return (0);
 }

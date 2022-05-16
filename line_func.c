@@ -4,9 +4,9 @@
 #include<stdlib.h>
 
 /**
- * execute_line - Parses the command line looking for commands and argumements.
+ * *execute_line - Parses the command line looking for commands and arguments.
  *
- * Return 0 on success
+ * Return: 0 on success
  */
 
 char *execute_line(void)
@@ -19,14 +19,14 @@ char *execute_line(void)
 
 	n_bytes = getline(&line, &bufsize, stdin);
 	line[n_bytes - 1] = '\0';
-	
 	/*printf("%s\n", line);*/
 	return (line);
 }
 
 /**
- * to_arg - recieves strings and turn it into array of args
- * Return : array of string 
+ * **to_args - recieves strings and turn it into array of args
+ * cmdstr - parameter holding the value
+ * Return: array of string
  *
  */
 char **to_args(char *cmdstr)
@@ -48,5 +48,5 @@ char **to_args(char *cmdstr)
 	}
 
 	args[args_count] = NULL;
-	return(args);
+	return (args);
 }
