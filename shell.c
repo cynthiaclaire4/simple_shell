@@ -6,27 +6,39 @@
 /*
  * main - body of the program
  */
-int main(int ac, char **av)
-{
-	char *cmdstr = NULL;
-	char **args = NULL;
 
+extern char **environ;
+
+int main(void)
+{
+	char *cmd = NULL;
+	char *args[] = {NULL, NULL};
+	size_t buff_size = 0;
+	size_t n_read = 0;
+	char *cmd_path = NULL;
+	
 	while (1)
 	{
-		if (ac > 1)
-			args = av + 1;
-		else
+		printf("cisfun$: ");
+		n_read = getline(&cmd, &buff_size,stdin);
+		cmd[n_read - 1] = '\0';
+
+		cmd_path = locate(cmd);
+		if (cmd_path)
 		{
-			/* read command from user */
-			cmdstr = execute_line();
-			/*change command into arg of strings */
-			args = to_args(cmdstr);
+			args[0] = cmd_path;
+			if (fork() == 0)
+				execve(*args, args, NULL);
+			else
+			{
+				wait(NULL);
+				free(cmd_path);
+				cmd_path = NULL;
+			}
 		}
-
-		/*execute commands */
-		execve(args[0], args, NULL);
-
-		dprintf(STDERR_FILENO, "%s: command not found\n", args[0]);
+		else
+			dprintf(STDERR_FILENO, "%s: command not found\n", cmd);
 	}
-	return (0);
+		return (0);
+
 }

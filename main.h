@@ -14,13 +14,19 @@
 #include <limits.h>
 char *execute_line(void);
 char **to_args(char *cmdstr);
+char *getenv(const char *name);
+char *locate(const char *name);
+char *join_paths(const char sep, const char *path1, const char *path2);
+int file_exists(const char *filepaths);
+char *strdup(const char *str);
 
-/* env */
+/* env 
 int envFunc(config *build);
 int setenvFunc(config *build);
 int unsetenvFunc(config *build);
 int _isalpha(int c);
 
-/* built_ins */
+* built_ins *
 _Bool findBuiltIns(config *build);
+*/
 #endif

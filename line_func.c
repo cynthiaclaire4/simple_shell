@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include<stdlib.h>
+#include "main.h"
 
 /**
  * *execute_line - Parses the command line looking for commands and arguments.
@@ -50,3 +51,83 @@ char **to_args(char *cmdstr)
 	args[args_count] = NULL;
 	return (args);
 }
+
+char *locate(const char *name)
+{
+	char *path = getenv("PATH");
+	char *dir_path = NULL;
+	char *file_path = NULL;
+
+	if(file_exists(name))
+		return (strdup(name));
+
+	strtok(path, "=");
+	dir_path = strtok(NULL, ":");
+	while(dir_path)
+	{
+		file_path = join_paths('/', dir_path, name);
+		if (file_exists(file_path))
+		{
+			break;
+			free(path);
+			return (file_path);
+		}
+		free(file_path);
+		file_path = NULL;
+
+		dir_path = strtok(NULL, ":");
+	}
+	free(path);
+	return (file_path);
+}
+
+char *join_paths(const char sep, const char *path1, const char *path2)
+{
+	size_t i = 0, k = 0;
+	size_t len = 0;
+	char *joined = NULL;
+
+	while(path1[i++] != '\0')
+	;
+	len += i;
+
+	i = 0;
+	while(path2[i++] != '\0')
+		;
+	len += i;
+	len += 1;
+
+	joined = malloc(sizeof(*joined) * (len + 1));
+
+	i = 0;
+	while(path1[k])
+	{
+		joined[i] = path1[k];
+		i++;
+		k++;
+	}
+
+	joined[i++] = sep;
+	k = 0;
+        while(path2[k])
+        {
+                joined[i] = path2[k];
+                i++;
+                k++;
+	}
+
+	joined[i] = '\0';
+	return (joined);
+}
+
+int file_exists(const char *filepath)
+{
+	struct stat buffer;
+
+	if (stat(filepath, &buffer) == 0)
+		return (1);
+
+	return (0);
+}
+
+

@@ -5,19 +5,19 @@
  * @build: input build
  * Return: Always 1
  */
-int envFunc(config *build)
+/* int envFunc(config *build)
 {
 		printList(build->env);
 			return (1);
 }
-
+*/
 /**
  * setenvFunc - adds env variable if it does not exist;
  * modify env variable if it does
  * @build: input build
  * Return: Always 1
  */
-int setenvFunc(config *build)
+/*int setenvFunc(config *build)
 {
 register int index, len;
 static char buffer[BUFSIZE];
@@ -45,14 +45,14 @@ addNodeAtIndex(&build->env, index, buffer);
 insertNullByte(buffer, 0);
 return (1);
 }
-
+*/
 /**
  * unsetenvFunc - deletes env variable if exists;
  * will only accept valid variables names
  * @build: input build
  * Return: Always 1
  */
-int unsetenvFunc(config *build)
+/*int unsetenvFunc(config *build)
 {
 register int foundVar, i = 1;
 _Bool foundMatch = false;
@@ -77,12 +77,13 @@ errorHandler(build);
 }
 return (1);
 }
-
+*/
 /**
  * _isalpha - checks if c is an alphabetic character
  * @c: potential alphabetical value
  * Return: if c is a letter, returns 1. Otherwise, return 0.
  */
+/*
 int _isalpha(int c)
 {
 if (c > 64 && c < 91)
@@ -92,3 +93,4 @@ return (1);
 else
 return (0);
 }
+*/
