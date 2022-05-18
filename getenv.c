@@ -1,5 +1,5 @@
 #include "main.h"
-
+#include<stdlib.h>
 extern char **environ;
 
 char *getenv(const char *name)
@@ -18,6 +18,4 @@ char *getenv(const char *name)
 
 		i++;
 	}
-}
-
-	
+}	
