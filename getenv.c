@@ -18,4 +18,5 @@ char *getenv(const char *name)
 
 		i++;
 	}
+	return (0);
 }	
